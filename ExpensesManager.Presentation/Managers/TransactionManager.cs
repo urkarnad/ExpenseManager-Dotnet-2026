@@ -1,8 +1,4 @@
-// показувати всі транзакції конкретного гаманця
-// показувати деталі конкретної транзакції
-
 using ExpensesManager.Services.Services;
-using ExpensesManager.Storage.Entities;
 
 namespace ExpensesManager.Presentation.Managers;
 
@@ -21,8 +17,8 @@ public class TransactionManager
 
         foreach (var transaction in transactions)
         {
-            Console.WriteLine($"{transaction.Id} - {transaction.Date:g} - " +
-                              $"{transaction.Amount} - {transaction.Category} - {transaction.Description}");
+            Console.WriteLine($"{transaction.Id} | {transaction.Date:g} | " +
+                              $"{transaction.Amount} {transaction.Currency} | {transaction.Category} - {transaction.Description}");
         }
     }
 
@@ -43,4 +39,4 @@ public class TransactionManager
         Console.WriteLine($"Date: {transaction.Date}");
     }
 }
-// TransactionManager → TransactionService → FakeStorage
+// TransactionManager -> TransactionService -> FakeStorage

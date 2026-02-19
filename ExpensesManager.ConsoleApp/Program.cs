@@ -47,7 +47,7 @@ class Program
             Console.ReadKey();
             Console.Clear();
             
-            transactionManager.ShowTransactionDetails(walletId);
+            transactionManager.ShowTransaction(walletId);
             
             Console.WriteLine();
             Console.WriteLine("Press any key to exit");

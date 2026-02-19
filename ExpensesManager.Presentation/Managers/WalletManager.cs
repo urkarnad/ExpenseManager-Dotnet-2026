@@ -1,5 +1,4 @@
 using ExpensesManager.Services.Services;
-using ExpensesManager.Storage.Entities;
 
 namespace ExpensesManager.Presentation.Managers;
 
@@ -18,7 +17,7 @@ public class WalletManager
 
         foreach (var wallet in wallets)
         {
-            Console.WriteLine($"{wallet.Id} - {wallet.Name} | {wallet.Currency} | Balance: {wallet.TotalAmount}");
+            Console.WriteLine($"{wallet.Id} - {wallet.Name} | {wallet.Currency} | Balance: {wallet.TotalAmount} {wallet.Currency}");
         }
     }
 
@@ -32,13 +31,13 @@ public class WalletManager
             return;
         }
         
-        Console.WriteLine($"Name: {wallet.Name} | {wallet.Currency} | {wallet.TotalAmount}");
-        Console.WriteLine($"Transactions: ");
-
-        foreach (var transaction in wallet.Transactions)
-        {
-            Console.WriteLine($"{transaction.Date} | {transaction.Amount} | " +
-                              $"{transaction.Category} | {transaction.Description}");
-        }
+        Console.WriteLine($"Name: {wallet.Name} | {wallet.Currency} | Total amount: {wallet.TotalAmount} {wallet.Currency}");
+        // Console.WriteLine($"Transactions: ");
+        //
+        // foreach (var transaction in wallet.Transactions)
+        // {
+        //     Console.WriteLine($"{transaction.Date} | {transaction.Amount} | " +
+        //                       $"{transaction.Category} | {transaction.Description}");
+        // }
     }
 }

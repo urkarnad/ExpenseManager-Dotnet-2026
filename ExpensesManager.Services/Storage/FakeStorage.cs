@@ -36,6 +36,6 @@ internal static class FakeStorage
         Wallets.Add(monoWallet);
         Wallets.Add(privatWallet);
         Wallets.Add(senseWallet);
-        // Wallets.Add(doraWallet);
+        Wallets.Add(doraWallet); // Empty Wallet
     }
 }
