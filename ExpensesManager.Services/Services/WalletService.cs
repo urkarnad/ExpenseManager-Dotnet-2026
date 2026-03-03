@@ -1,17 +1,38 @@
-using ExpensesManager.Storage.Entities;
-using ExpensesManager.Services.Storage;
+using ExpensesManager.Domain.Models;
 
 namespace ExpensesManager.Services.Services;
 
 public class WalletService
 {
-    public IEnumerable<Wallet> GetAllWallets()
+    private readonly StorageService _storage;
+
+    public WalletService(StorageService storage)
     {
-        return FakeStorage.Wallets;
+        _storage = storage;
     }
 
-    public Wallet? GetWalletById(Guid id)
+    public IEnumerable<Wallet> GetAllWallets()
     {
-        return FakeStorage.Wallets.FirstOrDefault(w => w.Id == id);
+        var wallets = _storage.GetWallets();
+        var transactions = _storage.GetTransactions();
+        
+        return wallets.Select(w =>
+        {
+            var walletTransactions = transactions
+                .Where(t => t.WalletId == w.Id)
+                .Select(t => new Transaction(
+                    t.Id,
+                    t.WalletId,
+                    t.Amount,
+                    t.Category,
+                    t.Description,
+                    t.Date));
+
+            return new Wallet(
+                w.Id,
+                w.Name,
+                w.Currency, 
+                walletTransactions);
+        });
     }
 }

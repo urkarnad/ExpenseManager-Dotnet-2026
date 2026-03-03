@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpensesManager.ConsoleApp"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpensesManager.Storage", "ExpensesManager.Storage\ExpensesManager.Storage.csproj", "{B2977623-C9DE-47F5-8801-185D763BD8F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpensesManager.Domain", "ExpensesManager.Domain\ExpensesManager.Domain.csproj", "{8D78BA9A-1022-4296-8BC5-4C30285885D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{B2977623-C9DE-47F5-8801-185D763BD8F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2977623-C9DE-47F5-8801-185D763BD8F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2977623-C9DE-47F5-8801-185D763BD8F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D78BA9A-1022-4296-8BC5-4C30285885D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D78BA9A-1022-4296-8BC5-4C30285885D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D78BA9A-1022-4296-8BC5-4C30285885D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D78BA9A-1022-4296-8BC5-4C30285885D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

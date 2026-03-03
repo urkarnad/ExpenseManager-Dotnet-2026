@@ -1,43 +1,24 @@
 using ExpensesManager.Services.Services;
+using ExpensesManager.Domain.Models;
 
 namespace ExpensesManager.Presentation.Managers;
 
 public class WalletManager
 {
     private readonly WalletService _walletService;
-    
+
     public WalletManager(WalletService walletService)
     {
         _walletService = walletService;
     }
 
-    public void ShowAllWallets()
+    public IReadOnlyCollection<Wallet> GetAllWallets()
     {
-        var wallets = _walletService.GetAllWallets();
-
-        foreach (var wallet in wallets)
-        {
-            Console.WriteLine($"{wallet.Id} - {wallet.Name} | {wallet.Currency} | Balance: {wallet.TotalAmount} {wallet.Currency}");
-        }
+        return _walletService.GetAllWallets().ToList().AsReadOnly();
     }
 
-    public void ShowWalletDetails(Guid walletId)
+    public Wallet? GetWalletById(Guid id)
     {
-        var wallet = _walletService.GetWalletById(walletId);
-
-        if (wallet == null)
-        {
-            Console.WriteLine("Wallet not found.");
-            return;
-        }
-        
-        Console.WriteLine($"Name: {wallet.Name} | {wallet.Currency} | Total amount: {wallet.TotalAmount} {wallet.Currency}");
-        // Console.WriteLine($"Transactions: ");
-        //
-        // foreach (var transaction in wallet.Transactions)
-        // {
-        //     Console.WriteLine($"{transaction.Date} | {transaction.Amount} | " +
-        //                       $"{transaction.Category} | {transaction.Description}");
-        // }
+        return _walletService.GetAllWallets().FirstOrDefault(wallet => wallet.Id == id);
     }
 }

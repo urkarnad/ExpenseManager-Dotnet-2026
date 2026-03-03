@@ -1,4 +1,5 @@
 using ExpensesManager.Services.Services;
+using ExpensesManager.Domain.Models;
 
 namespace ExpensesManager.Presentation.Managers;
 
@@ -11,32 +12,9 @@ public class TransactionManager
         _transactionService = transactionService;
     }
 
-    public void ShowTransaction(Guid walletId)
+    public IReadOnlyCollection<Transaction> GetTransactionsByWalletId(Guid walletId)
     {
-        var transactions = _transactionService.GetTransactionsByWalletId(walletId);
-
-        foreach (var transaction in transactions)
-        {
-            Console.WriteLine($"{transaction.Id} | {transaction.Date:g} | " +
-                              $"{transaction.Amount} {transaction.Currency} | {transaction.Category} - {transaction.Description}");
-        }
+        return _transactionService.GetByWalletId(walletId).ToList().AsReadOnly();
     }
-
-    public void ShowTransactionDetails(Guid transactionId)
-    {
-        var transaction = _transactionService.GetTransactionById(transactionId);
-
-        if (transaction == null)
-        {
-            Console.WriteLine("No transaction found.");
-            return;
-        }
-        
-        Console.WriteLine("Transaction details:");
-        Console.WriteLine($"Amount: {transaction.Amount}");
-        Console.WriteLine($"Category: {transaction.Category}");
-        Console.WriteLine($"Description: {transaction.Description}");
-        Console.WriteLine($"Date: {transaction.Date}");
-    }
+    
 }
-// TransactionManager -> TransactionService -> FakeStorage
