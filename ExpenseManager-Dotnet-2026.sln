@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37012.4
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpensesManager.Services", "ExpensesManager.Services\ExpensesManager.Services.csproj", "{BBD2D833-9E8D-4CDD-854B-CA93E1CFCA51}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpensesManager.Presentation", "ExpensesManager.Presentation\ExpensesManager.Presentation.csproj", "{7A2EC43E-08A5-4E91-B26A-2549E86E9C76}"
@@ -9,6 +12,15 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpensesManager.Storage", "ExpensesManager.Storage\ExpensesManager.Storage.csproj", "{B2977623-C9DE-47F5-8801-185D763BD8F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpensesManager.Domain", "ExpensesManager.Domain\ExpensesManager.Domain.csproj", "{8D78BA9A-1022-4296-8BC5-4C30285885D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpensesManager.MyMauiApp", "ExpensesManager.MyMauiApp\ExpensesManager.MyMauiApp.csproj", "{E6179F72-D1F5-4ED2-A74C-7F31C8F36100}"
+	ProjectSection(ProjectDependencies) = postProject
+		{52FC3F77-EE97-4B42-BD7E-971A6438B1F3} = {52FC3F77-EE97-4B42-BD7E-971A6438B1F3}
+		{7A2EC43E-08A5-4E91-B26A-2549E86E9C76} = {7A2EC43E-08A5-4E91-B26A-2549E86E9C76}
+		{8D78BA9A-1022-4296-8BC5-4C30285885D0} = {8D78BA9A-1022-4296-8BC5-4C30285885D0}
+		{B2977623-C9DE-47F5-8801-185D763BD8F6} = {B2977623-C9DE-47F5-8801-185D763BD8F6}
+		{BBD2D833-9E8D-4CDD-854B-CA93E1CFCA51} = {BBD2D833-9E8D-4CDD-854B-CA93E1CFCA51}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +48,16 @@ Global
 		{8D78BA9A-1022-4296-8BC5-4C30285885D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D78BA9A-1022-4296-8BC5-4C30285885D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D78BA9A-1022-4296-8BC5-4C30285885D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6179F72-D1F5-4ED2-A74C-7F31C8F36100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6179F72-D1F5-4ED2-A74C-7F31C8F36100}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6179F72-D1F5-4ED2-A74C-7F31C8F36100}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E6179F72-D1F5-4ED2-A74C-7F31C8F36100}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6179F72-D1F5-4ED2-A74C-7F31C8F36100}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE2F1AFA-F277-42BA-A74B-85EEB95D2D4E}
 	EndGlobalSection
 EndGlobal

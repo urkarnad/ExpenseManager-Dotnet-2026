@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExpensesManager.MyMauiApp.Pages.TransactionDetailsPage"
+             Title="Transaction Details">
+
+    <VerticalStackLayout Padding="20" Spacing="10">
+
+        <Label x:Name="AmountLabel" FontSize="22"/>
+        <Label x:Name="CategoryLabel" FontSize="18"/>
+        <Label x:Name="DescriptionLabel" FontSize="18"/>
+        <Label x:Name="DateLabel" FontSize="18"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>

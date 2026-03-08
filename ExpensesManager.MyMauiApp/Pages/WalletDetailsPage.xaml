@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExpensesManager.MyMauiApp.Pages.WalletDetailsPage"
+             Title="Wallet Details">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <Label
+            x:Name="WalletName"
+            FontSize="26"
+            FontAttributes="Bold"/>
+
+        <Label
+            x:Name="WalletCurrency"
+            FontSize="18"/>
+
+        <Label
+            x:Name="WalletBalance"
+            FontSize="18"
+            TextColor="Green"/>
+
+        <Label
+            Text="Transactions"
+            FontSize="22"
+            FontAttributes="Bold"/>
+
+        <CollectionView
+            x:Name="TransactionsList"
+            SelectionMode="Single"
+            SelectionChanged="TransactionSelected">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="5">
+                        <VerticalStackLayout>
+
+                            <Label
+                                Text="{Binding Description}"
+                                FontAttributes="Bold"/>
+
+                            <Label
+                                Text="{Binding Amount}"/>
+
+                            <Label
+                                Text="{Binding Date}"/>
+
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </VerticalStackLayout>
+
+</ContentPage>
