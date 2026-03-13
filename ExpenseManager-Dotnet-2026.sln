@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37012.4
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpensesManager.Services", "ExpensesManager.Services\ExpensesManager.Services.csproj", "{BBD2D833-9E8D-4CDD-854B-CA93E1CFCA51}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpensesManager.Presentation", "ExpensesManager.Presentation\ExpensesManager.Presentation.csproj", "{7A2EC43E-08A5-4E91-B26A-2549E86E9C76}"
