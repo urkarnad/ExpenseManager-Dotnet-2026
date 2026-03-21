@@ -2,22 +2,19 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ExpensesManager.MyMauiApp.Pages.WalletListPage"
-             Title="WalletListPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Wallets"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            FontSize="24"/>
-
+             Title="Wallets">
+    <VerticalStackLayout Padding="20" Spacing="10">
+        <Label Text="My Wallets" FontSize="28" FontAttributes="Bold"/>
         <CollectionView
-            x:Name="WalletList"
+            ItemsSource="{Binding Wallets}"
             SelectionMode="Single"
-            SelectionChanged="WalletSelected">
-
+            SelectionChangedCommand="{Binding SelectWalletCommand}"
+            SelectionChangedCommandParameter="{Binding SelectedItem, Source={RelativeSource Self}}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Label Text="{Binding Name}" FontSize="18"/>
+                    <Frame Padding="15" Margin="5">
+                        <Label Text="{Binding Name}" FontSize="18"/>
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

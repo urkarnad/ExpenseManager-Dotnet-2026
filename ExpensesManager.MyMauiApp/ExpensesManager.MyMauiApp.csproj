@@ -65,8 +65,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\ExpensesManager.Domain\ExpensesManager.Domain.csproj" />
-	  <ProjectReference Include="..\ExpensesManager.Presentation\ExpensesManager.Presentation.csproj" />
 	  <ProjectReference Include="..\ExpensesManager.Services\ExpensesManager.Services.csproj" />
 	  <ProjectReference Include="..\ExpensesManager.Storage\ExpensesManager.Storage.csproj" />
 	</ItemGroup>
@@ -81,6 +79,11 @@
 	  <MauiXaml Update="Pages\WalletListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Commands\" />
+	  <Folder Include="Views\" />
 	</ItemGroup>
 
 </Project>

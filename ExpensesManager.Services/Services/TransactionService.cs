@@ -1,26 +1,30 @@
-using ExpensesManager.Domain.Models;
+using ExpensesManager.Services.DTOs;
+using ExpensesManager.Services.Interfaces;
+using ExpensesManager.Storage.Interfaces;
+using ExpensesManager.Storage.Repositories;
 
 namespace ExpensesManager.Services.Services;
 
-public class TransactionService
+public class TransactionService : ITransactionService
 {
-    private readonly StorageService _storage;
+    private readonly ITransactionRepository _repo;
 
-    public TransactionService(StorageService storage)
+    public TransactionService(ITransactionRepository repo)
     {
-        _storage = storage;
+        _repo = repo;
     }
 
-    public IEnumerable<Transaction> GetByWalletId(Guid walletId)
+    public TransactionDetailsDto GetById(Guid id)
     {
-        return _storage.GetTransactions()
-            .Where(t => t.WalletId == walletId)
-            .Select(t => new Transaction(
-                t.Id,
-                t.WalletId,
-                t.Amount,
-                t.Category,
-                t.Description,
-                t.Date));
+        var t = _repo.GetById(id);
+
+        return new TransactionDetailsDto
+        {
+            Id = t.Id,
+            Amount = t.Amount,
+            Category = t.Category,
+            Description = t.Description,
+            Date = t.Date
+        };
     }
 }

@@ -3,12 +3,12 @@ using ExpensesManager.Storage.Entities;
 
 namespace ExpensesManager.Services.Storage;
 
-internal static class FakeStorage
+public class FakeStorage
 {
-    public static List<WalletStorageModel> Wallets { get; }
-    public static List<TransactionStorageModel> Transactions { get; }
+    public List<WalletStorageModel> Wallets { get; }
+    public List<TransactionStorageModel> Transactions { get; }
 
-    static FakeStorage()
+    public FakeStorage()
     {
         Wallets = new List<WalletStorageModel>();
         Transactions = new List<TransactionStorageModel>();
