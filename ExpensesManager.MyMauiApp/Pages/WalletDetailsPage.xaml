@@ -2,56 +2,61 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ExpensesManager.MyMauiApp.Pages.WalletDetailsPage"
-             Title="Wallet Details">
+             Title="Wallet Details"
+             BackgroundColor="#FFF0F5">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="12">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+            <Frame BackgroundColor="#F8BBD0"
+                   CornerRadius="20"
+                   Padding="20"
+                   BorderColor="#F48FB1"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="{Binding Wallet.Name}"
+                           FontSize="26"
+                           FontAttributes="Bold"
+                           TextColor="#880E4F"/>
+                    <Label Text="{Binding Wallet.Amount, StringFormat='Balance: {0:F2}'}"
+                           FontSize="20"
+                           TextColor="#C2185B"
+                           FontAttributes="Bold"/>
+                </VerticalStackLayout>
+            </Frame>
 
-        <Label
-            x:Name="WalletName"
-            FontSize="26"
-            FontAttributes="Bold"/>
+            <Label Text="Transactions"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="#C2185B"
+                   Margin="0,10,0,0"/>
 
-        <Label
-            x:Name="WalletCurrency"
-            FontSize="18"/>
+            <CollectionView
+                ItemsSource="{Binding Transactions}"
+                SelectionMode="Single"
+                SelectionChangedCommand="{Binding SelectTransactionCommand}"
+                SelectionChangedCommandParameter="{Binding SelectedItem, Source={RelativeSource Self}}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="White"
+                               CornerRadius="14"
+                               Padding="16,12"
+                               Margin="0,5"
+                               BorderColor="#F8BBD0"
+                               HasShadow="True">
+                            <HorizontalStackLayout Spacing="12">
+                                <Label Text="💸" FontSize="22" VerticalOptions="Center"/>
+                                <VerticalStackLayout VerticalOptions="Center">
+                                    <Label Text="{Binding Amount, StringFormat='Amount: {0:F2}'}"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="#880E4F"/>
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-        <Label
-            x:Name="WalletBalance"
-            FontSize="18"
-            TextColor="Green"/>
-
-        <Label
-            Text="Transactions"
-            FontSize="22"
-            FontAttributes="Bold"/>
-
-        <CollectionView
-            x:Name="TransactionsList"
-            SelectionMode="Single"
-            SelectionChanged="TransactionSelected">
-
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Padding="10" Margin="5">
-                        <VerticalStackLayout>
-
-                            <Label
-                                Text="{Binding Description}"
-                                FontAttributes="Bold"/>
-
-                            <Label
-                                Text="{Binding Amount}"/>
-
-                            <Label
-                                Text="{Binding Date}"/>
-
-                        </VerticalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-
-        </CollectionView>
-
-    </VerticalStackLayout>
-
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

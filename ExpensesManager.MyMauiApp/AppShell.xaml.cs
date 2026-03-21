@@ -1,10 +1,12 @@
-﻿namespace ExpensesManager.MyMauiApp
+﻿namespace ExpensesManager.MyMauiApp;
+
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+
+        Routing.RegisterRoute("WalletDetailsPage", typeof(Pages.WalletDetailsPage));
+        Routing.RegisterRoute("TransactionDetailsPage", typeof(Pages.TransactionDetailsPage));
     }
 }

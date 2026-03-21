@@ -1,38 +1,50 @@
-using ExpensesManager.Domain.Models;
+using ExpensesManager.Services.DTOs;
+using ExpensesManager.Services.Interfaces;
+using ExpensesManager.Storage.Interfaces;
+using ExpensesManager.Storage.Repositories;
 
 namespace ExpensesManager.Services.Services;
 
-public class WalletService
+public class WalletService : IWalletService
 {
-    private readonly StorageService _storage;
+    private readonly IWalletRepository _walletRepo;
+    private readonly ITransactionRepository _transactionRepo;
 
-    public WalletService(StorageService storage)
+    public WalletService(
+        IWalletRepository walletRepo,
+        ITransactionRepository transactionRepo)
     {
-        _storage = storage;
+        _walletRepo = walletRepo;
+        _transactionRepo = transactionRepo;
     }
 
-    public IEnumerable<Wallet> GetAllWallets()
+    public IEnumerable<WalletListDto> GetAll()
     {
-        var wallets = _storage.GetWallets();
-        var transactions = _storage.GetTransactions();
-        
-        return wallets.Select(w =>
-        {
-            var walletTransactions = transactions
-                .Where(t => t.WalletId == w.Id)
-                .Select(t => new Transaction(
-                    t.Id,
-                    t.WalletId,
-                    t.Amount,
-                    t.Category,
-                    t.Description,
-                    t.Date));
+        return _walletRepo.GetAll()
+            .Select(w => new WalletListDto
+            {
+                Id = w.Id,
+                Name = w.Name
+            });
+    }
 
-            return new Wallet(
-                w.Id,
-                w.Name,
-                w.Currency, 
-                walletTransactions);
-        });
+    public WalletDetailsDto GetById(Guid id)
+    {
+        var wallet = _walletRepo.GetById(id);
+        var transactions = _transactionRepo.GetByWalletId(id);
+
+        var amount = transactions.Sum(t => t.Amount);
+
+        return new WalletDetailsDto
+        {
+            Id = wallet.Id,
+            Name = wallet.Name,
+            Amount = amount,
+            Transactions = transactions.Select(t => new TransactionListDto
+            {
+                Id = t.Id,
+                Amount = t.Amount
+            }).ToList()
+        };
     }
 }
