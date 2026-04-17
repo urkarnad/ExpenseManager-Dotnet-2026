@@ -1,15 +1,18 @@
-﻿namespace ExpensesManager.MyMauiApp
-{
-    public partial class App : Application
-    {
-        public App()
-        {
-            InitializeComponent();
-        }
+﻿using ExpensesManager.Storage.Database;
+using ExpensesManager.Storage.Storage;
 
-        protected override Window CreateWindow(IActivationState? activationState)
+namespace ExpensesManager.MyMauiApp;
+
+public partial class App : Application
+{
+    public App(JsonStorage jsonStorage, DatabaseSeeder seeder)
+    {
+        InitializeComponent();
+        MainPage = new AppShell();
+
+        Task.Run(async () =>
         {
-            return new Window(new AppShell());
-        }
+            await seeder.SeedIfEmptyAsync();
+        }).GetAwaiter().GetResult();
     }
 }
