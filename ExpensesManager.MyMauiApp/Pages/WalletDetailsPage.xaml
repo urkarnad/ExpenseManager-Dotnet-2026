@@ -4,59 +4,120 @@
              x:Class="ExpensesManager.MyMauiApp.Pages.WalletDetailsPage"
              Title="Wallet Details"
              BackgroundColor="#FFF0F5">
-    <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="12">
 
-            <Frame BackgroundColor="#F8BBD0"
-                   CornerRadius="20"
-                   Padding="20"
-                   BorderColor="#F48FB1"
-                   HasShadow="True">
-                <VerticalStackLayout Spacing="6">
-                    <Label Text="{Binding Wallet.Name}"
-                           FontSize="26"
-                           FontAttributes="Bold"
-                           TextColor="#880E4F"/>
-                    <Label Text="{Binding Wallet.Amount, StringFormat='Balance: {0:F2}'}"
-                           FontSize="20"
-                           TextColor="#C2185B"
-                           FontAttributes="Bold"/>
-                </VerticalStackLayout>
-            </Frame>
+    <Grid RowDefinitions="*">
 
-            <Label Text="Transactions"
-                   FontSize="22"
-                   FontAttributes="Bold"
-                   TextColor="#C2185B"
-                   Margin="0,10,0,0"/>
+        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           Color="#C2185B"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           ZIndex="10"/>
 
-            <CollectionView
-                ItemsSource="{Binding Transactions}"
-                SelectionMode="Single"
-                SelectionChangedCommand="{Binding SelectTransactionCommand}"
-                SelectionChangedCommandParameter="{Binding SelectedItem, Source={RelativeSource Self}}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame BackgroundColor="White"
-                               CornerRadius="14"
-                               Padding="16,12"
-                               Margin="0,5"
-                               BorderColor="#F8BBD0"
-                               HasShadow="True">
-                            <HorizontalStackLayout Spacing="12">
-                                <Label Text="💸" FontSize="22" VerticalOptions="Center"/>
-                                <VerticalStackLayout VerticalOptions="Center">
-                                    <Label Text="{Binding Amount, StringFormat='Amount: {0:F2}'}"
-                                           FontSize="16"
-                                           FontAttributes="Bold"
-                                           TextColor="#880E4F"/>
-                                </VerticalStackLayout>
-                            </HorizontalStackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+        <ScrollView IsEnabled="{Binding IsNotBusy}">
+            <VerticalStackLayout Padding="20" Spacing="12">
 
-        </VerticalStackLayout>
-    </ScrollView>
+                <Frame BackgroundColor="#F8BBD0" CornerRadius="20" Padding="20"
+                       BorderColor="#F48FB1" HasShadow="True">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="{Binding Wallet.Name}"
+                               FontSize="26" FontAttributes="Bold" TextColor="#880E4F"/>
+                        <Label Text="{Binding Wallet.Amount, StringFormat='Balance: {0:F2}'}"
+                               FontSize="20" TextColor="#C2185B" FontAttributes="Bold"/>
+                        <Label Text="{Binding Wallet.Currency, StringFormat='Currency: {0}'}"
+                               FontSize="16" TextColor="#555"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" CornerRadius="14" Padding="14" BorderColor="#F48FB1">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Edit Wallet" FontSize="16" FontAttributes="Bold" TextColor="#C2185B"/>
+                        <Entry Placeholder="Wallet name"
+                               Text="{Binding EditName}"
+                               BackgroundColor="#FFF0F5" TextColor="#880E4F"/>
+                        <Picker Title="Currency"
+                                ItemsSource="{Binding Currencies}"
+                                SelectedItem="{Binding EditCurrency}"
+                                TextColor="#880E4F"/>
+                        <Button Text="Save Changes"
+                                Command="{Binding SaveWalletCommand}"
+                                BackgroundColor="#C2185B" TextColor="White" CornerRadius="10"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="#FCE4EC" CornerRadius="14" Padding="14" BorderColor="#F48FB1">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Add Transaction" FontSize="16" FontAttributes="Bold" TextColor="#C2185B"/>
+                        <Entry Placeholder="Amount (e.g. -500 or 1000)"
+                               Text="{Binding NewAmount}"
+                               Keyboard="Numeric"
+                               BackgroundColor="White" TextColor="#880E4F"/>
+                        <Entry Placeholder="Description"
+                               Text="{Binding NewDescription}"
+                               BackgroundColor="White" TextColor="#880E4F"/>
+                        <Picker Title="Category"
+                                ItemsSource="{Binding Categories}"
+                                SelectedItem="{Binding NewCategory}"
+                                TextColor="#880E4F"/>
+                        <Button Text="Add Transaction"
+                                Command="{Binding AddTransactionCommand}"
+                                BackgroundColor="#C2185B" TextColor="White" CornerRadius="10"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" CornerRadius="14" Padding="14" BorderColor="#F48FB1">
+                    <VerticalStackLayout Spacing="8">
+                        <Entry Placeholder="Search transactions..."
+                               Text="{Binding SearchText}"
+                               BackgroundColor="Transparent" TextColor="#880E4F"/>
+                        <Picker Title="Sort by"
+                                ItemsSource="{Binding SortOptions}"
+                                SelectedItem="{Binding SelectedSort}"
+                                TextColor="#880E4F"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Label Text="Transactions" FontSize="22" FontAttributes="Bold"
+                       TextColor="#C2185B" Margin="0,4,0,0"/>
+
+                <CollectionView ItemsSource="{Binding Transactions}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BackgroundColor="White" CornerRadius="14" Padding="16,12"
+                                   Margin="0,5" BorderColor="#F8BBD0" HasShadow="True">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.SelectTransactionCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                    </Grid.GestureRecognizers>
+
+                                    <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
+                                        <Label Text="{Binding Amount, StringFormat='{0:F2}'}"
+                                               FontSize="17" FontAttributes="Bold" TextColor="#880E4F"/>
+                                        <Label Text="{Binding Description}"
+                                               FontSize="14" TextColor="#555"/>
+                                        <Label Text="{Binding Category}"
+                                               FontSize="13" TextColor="#E91E63"/>
+                                        <Label Text="{Binding Date, StringFormat='{0:dd.MM.yyyy}'}"
+                                               FontSize="12" TextColor="#AAA"/>
+                                    </VerticalStackLayout>
+
+                                    <Button Grid.Column="1"
+                                            Text="Trash!"
+                                            BackgroundColor="Transparent"
+                                            TextColor="#E91E63"
+                                            FontSize="20"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteTransactionCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
 </ContentPage>

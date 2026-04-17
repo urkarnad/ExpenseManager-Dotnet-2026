@@ -4,7 +4,11 @@ namespace ExpensesManager.Storage.Interfaces
 {
     public interface IWalletRepository
     {
-        List<WalletStorageModel> GetAll();
-        WalletStorageModel GetById(Guid id);
+        Task<List<WalletStorageModel>> GetAllAsync();
+        Task<WalletStorageModel?> GetByIdAsync(Guid id);
+        Task AddAsync(WalletStorageModel wallet);
+        Task UpdateAsync(WalletStorageModel wallet);
+        Task DeleteAsync(Guid id);
+        Task<bool> IsEmptyAsync();
     }
 }
